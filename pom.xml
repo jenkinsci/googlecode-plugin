@@ -8,7 +8,7 @@
   </parent>
   
   <artifactId>googlecode</artifactId>
-  <version>1.6</version>
+  <version>1.7-SNAPSHOT</version>
   <packaging>hpi</packaging>
   <name>Jenkins Google Code plugin</name>
   <url>http://wiki.jenkins-ci.org/display/JENKINS/Google+Code+Plugin</url>
@@ -47,10 +47,4 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
-  <scm>
-    <connection>scm:svn:https://svn.jenkins-ci.org/tags/googlecode-1.6</connection>
-    <developerConnection>scm:svn:https://svn.jenkins-ci.org/tags/googlecode-1.6</developerConnection>
-    <url>http://fisheye.jenkins-ci.org/browse/Hudson/tags/googlecode-1.6</url>
-  </scm>
 </project>
