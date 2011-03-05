@@ -4,15 +4,14 @@
   <parent>
     <groupId>org.jvnet.hudson.plugins</groupId>
     <artifactId>plugin</artifactId>
-    <version>1.324</version>
-    <relativePath>../pom.xml</relativePath>
+    <version>1.345</version>
   </parent>
   
   <artifactId>googlecode</artifactId>
   <version>1.6-SNAPSHOT</version>
   <packaging>hpi</packaging>
-  <name>Hudson Google Code plugin</name>
-  <url>http://wiki.hudson-ci.org/display/HUDSON/Google+Code+Plugin</url>
+  <name>Jenkins Google Code plugin</name>
+  <url>http://wiki.jenkins-ci.org/display/JENKINS/Google+Code+Plugin</url>
 
   <developers>
     <developer>
@@ -33,7 +32,7 @@
     <dependency>
       <groupId>org.jvnet.hudson.plugins</groupId>
       <artifactId>subversion</artifactId>
-      <version>1.1</version>
+      <version>1.11</version>
     </dependency>
     <dependency>
         <groupId>org.mockito</groupId>

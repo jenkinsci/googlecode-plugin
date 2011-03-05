@@ -13,7 +13,7 @@ import hudson.scm.SCM;
 
 /**
  * ItemListener that will upgrade GoogleCodeSCM objects to GoogleCodeSCMEx objects.
- * Due to the bug https://hudson.dev.java.net/issues/show_bug.cgi?id=4136, the old Google code SCM
+ * Due to the bug http://jenkins-ci.org/issue/4136, the old Google code SCM
  * objects has to be reconfigured to use the new GoogleCodeSCMEx.
  * 
  * @author redsolo
@@ -29,7 +29,7 @@ public class GoogleCodeSCMUpgrader extends ItemListener {
 
     /**
      * Goes through the items to upgrade each GoogleCodeSCM to GoogleCodeSCMEx
-     * Method extracted because it is easier to mock TopLevelItems than start a Hudson test case
+     * Method extracted because it is easier to mock TopLevelItems than start a Jenkins test case
      * @param items list of top level items
      */
     void onLoaded(List<TopLevelItem> items) {
@@ -59,7 +59,7 @@ public class GoogleCodeSCMUpgrader extends ItemListener {
         } catch (Exception e) {
             logger.warning("Error while upgrading Google Code SCM configuration for '" + name + 
                     "'. The project is still usable, but should be manually configured again. " +
-                    "For more information please see https://hudson.dev.java.net/issues/show_bug.cgi?id=4136.");
+                    "For more information please see http://jenkins-ci.org/issue/4136.");
             abstractProject.setScm(oldScm);
         }
     }
