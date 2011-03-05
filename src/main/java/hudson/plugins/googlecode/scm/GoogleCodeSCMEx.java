@@ -28,7 +28,7 @@ public class GoogleCodeSCMEx extends SubversionSCM {
     
     @DataBoundConstructor
     public GoogleCodeSCMEx(String directory, ModuleLocation locations) {
-        super(Arrays.asList(locations), true, new GoogleCodeRepositoryBrowser(new GoogleCodeProjectProperty.PropertyRetrieverImpl()), "");
+        super(Arrays.asList(locations), true, false, new GoogleCodeRepositoryBrowser(new GoogleCodeProjectProperty.PropertyRetrieverImpl()), "", null, null, null);
         this.directory = directory;
     }
 
