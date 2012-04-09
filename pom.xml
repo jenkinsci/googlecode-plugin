@@ -8,7 +8,7 @@
   </parent>
   
   <artifactId>googlecode</artifactId>
-  <version>1.7-SNAPSHOT</version>
+  <version>1.7</version>
   <packaging>hpi</packaging>
   <name>Jenkins Google Code plugin</name>
   <url>http://wiki.jenkins-ci.org/display/JENKINS/Google+Code+Plugin</url>
