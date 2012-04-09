@@ -1,6 +1,8 @@
 package hudson.plugins.googlecode.scm;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import hudson.Extension;
@@ -57,10 +59,14 @@ public class GoogleCodeSCMUpgrader extends ItemListener {
             abstractProject.save();
             logger.info("Upgraded Google Code SCM in '" + name + "'.");
         } catch (Exception e) {
-            logger.warning("Error while upgrading Google Code SCM configuration for '" + name + 
+            logger.log(Level.WARNING, "Error while upgrading Google Code SCM configuration for '" + name +
                     "'. The project is still usable, but should be manually configured again. " +
-                    "For more information please see http://jenkins-ci.org/issue/4136.");
-            abstractProject.setScm(oldScm);
+                    "For more information please see http://jenkins-ci.org/issue/4136.", e);
+            try {
+                abstractProject.setScm(oldScm);
+            } catch (IOException e1) {
+                // swallow
+            }
         }
     }
 

@@ -2,8 +2,13 @@ package hudson.plugins.googlecode.scm;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Map;
 
+import hudson.scm.PollingResult;
+import hudson.scm.SCMRevisionState;
+import jenkins.model.Jenkins;
 import org.kohsuke.stapler.DataBoundConstructor;
 import hudson.FilePath;
 import hudson.Launcher;
@@ -11,7 +16,6 @@ import hudson.Util;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
-import hudson.model.Hudson;
 import hudson.model.TaskListener;
 import hudson.plugins.googlecode.GoogleCodeProjectProperty;
 import hudson.plugins.googlecode.GoogleCodeRepositoryBrowser;
@@ -19,6 +23,7 @@ import hudson.scm.ChangeLogParser;
 import hudson.scm.RepositoryBrowser;
 import hudson.scm.SCM;
 import hudson.scm.SubversionSCM;
+import org.kohsuke.stapler.framework.io.IOException2;
 
 /**
  * Source code manager that is auto configured from the GoogleCodeProjectProperty.
@@ -61,7 +66,7 @@ public class GoogleCodeSCM extends SCM {
     @SuppressWarnings("deprecation")
     private SCM getSCM() {
         if (configuredScm == null) {
-            for (AbstractProject<?, ?> project : Hudson.getInstance().getItems(AbstractProject.class)) {
+            for (AbstractProject<?, ?> project : Jenkins.getInstance().getAllItems(AbstractProject.class)) {
                 if (this == project.getScm() ) {
                     GoogleCodeProjectProperty property = project.getProperty(GoogleCodeProjectProperty.class);
                     if (property != null) {
@@ -82,9 +87,9 @@ public class GoogleCodeSCM extends SCM {
         }
         return configuredScm;        
     }
-    
+
     @Override
-    public void buildEnvVars(AbstractBuild build, Map<String, String> env) {
+    public void buildEnvVars(AbstractBuild<?,?> build, Map<String, String> env) {
         getSCM().buildEnvVars(build, env);
     }
     
@@ -111,6 +116,26 @@ public class GoogleCodeSCM extends SCM {
     @Override
     public boolean supportsPolling() {
         return getSCM().supportsPolling();
+    }
+
+    @Override
+    public SCMRevisionState calcRevisionsFromBuild(AbstractBuild<?, ?> build, Launcher launcher, TaskListener listener) throws IOException, InterruptedException {
+        return getSCM().calcRevisionsFromBuild(build,launcher,listener);
+    }
+
+    @Override
+    protected PollingResult compareRemoteRevisionWith(AbstractProject<?, ?> project, Launcher launcher, FilePath workspace, TaskListener listener, SCMRevisionState baseline) throws IOException, InterruptedException {
+        try {
+            Method m = SCM.class.getDeclaredMethod("compareRemoteRevisionWith", AbstractProject.class, Launcher.class, FilePath.class, TaskListener.class, SCMRevisionState.class);
+            m.setAccessible(true);
+            return (PollingResult)m.invoke(getSCM(),project,launcher,workspace,listener,baseline);
+        } catch (NoSuchMethodException e) {
+            throw new IOException2(e);
+        } catch (IllegalAccessException e) {
+            throw new IOException2(e);
+        } catch (InvocationTargetException e) {
+            throw new IOException2(e);
+        }
     }
 
     @Override
