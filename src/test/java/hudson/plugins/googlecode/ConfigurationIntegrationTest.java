@@ -6,8 +6,8 @@ import hudson.scm.SubversionSCM.ModuleLocation;
 
 import org.jvnet.hudson.test.HudsonTestCase;
 
-import com.gargoylesoftware.htmlunit.html.HtmlButton;
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import org.htmlunit.html.HtmlButton;
+import org.htmlunit.html.HtmlForm;
 
 public class ConfigurationIntegrationTest extends HudsonTestCase {
     /**

@@ -12,13 +12,13 @@ import hudson.scm.SubversionSCM.ModuleLocation;
 import org.jvnet.hudson.test.Bug;
 import org.jvnet.hudson.test.HudsonTestCase;
 
-import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-import com.gargoylesoftware.htmlunit.WebAssert;
-import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlButton;
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
-import com.gargoylesoftware.htmlunit.html.HtmlInput;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import org.htmlunit.FailingHttpStatusCodeException;
+import org.htmlunit.WebAssert;
+import org.htmlunit.html.DomNode;
+import org.htmlunit.html.HtmlButton;
+import org.htmlunit.html.HtmlForm;
+import org.htmlunit.html.HtmlInput;
+import org.htmlunit.html.HtmlPage;
 
 public class GoogleCodeSCMExIntegrationTest extends HudsonTestCase {
 
@@ -46,7 +46,7 @@ public class GoogleCodeSCMExIntegrationTest extends HudsonTestCase {
         
         WebClient client = new WebClient();
         HtmlForm form = client.getPage(project, "configure").getFormByName("config");
-        form.getInputByName("googlecode.googlecodeWebsite").setValueAttribute("http://code.google.com/p/leetdev3da/");
+        form.getInputByName("googlecode.googlecodeWebsite").setValue("http://code.google.com/p/leetdev3da/");
         getGoogleCodeHtmlInput(form).click(); // 
         form.submit((HtmlButton)last(form.getHtmlElementsByTagName("button")));
         
@@ -63,8 +63,8 @@ public class GoogleCodeSCMExIntegrationTest extends HudsonTestCase {
         
         WebClient client = new WebClient();
         HtmlForm form = client.getPage(project, "configure").getFormByName("config");
-        form.getInputByName("googlecode.googlecodeWebsite").setValueAttribute("http://code.google.com/p/leetdev3da/");
-        form.getInputByName("googlecode.svnRemoteDirectory").setValueAttribute("tags/tag");
+        form.getInputByName("googlecode.googlecodeWebsite").setValue("http://code.google.com/p/leetdev3da/");
+        form.getInputByName("googlecode.svnRemoteDirectory").setValue("tags/tag");
         
         getGoogleCodeHtmlInput(form).click();  
         form.submit((HtmlButton)last(form.getHtmlElementsByTagName("button")));
@@ -81,8 +81,8 @@ public class GoogleCodeSCMExIntegrationTest extends HudsonTestCase {
         
         WebClient client = new WebClient();
         HtmlForm form = client.getPage(project, "configure").getFormByName("config");
-        form.getInputByName("googlecode.googlecodeWebsite").setValueAttribute("http://code.google.com/p/leetdev3da/");
-        form.getInputByName("googlecode.svnRemoteDirectory").setValueAttribute("tags/tag");
+        form.getInputByName("googlecode.googlecodeWebsite").setValue("http://code.google.com/p/leetdev3da/");
+        form.getInputByName("googlecode.svnRemoteDirectory").setValue("tags/tag");
         getGoogleCodeHtmlInput(form).click(); // 
         form.submit((HtmlButton)last(form.getHtmlElementsByTagName("button")));
         
@@ -98,7 +98,7 @@ public class GoogleCodeSCMExIntegrationTest extends HudsonTestCase {
             
             WebClient client = new WebClient();
             HtmlForm form = client.getPage(project, "configure").getFormByName("config");
-            form.getInputByName("googlecode.svnRemoteDirectory").setValueAttribute("tags/tag");
+            form.getInputByName("googlecode.svnRemoteDirectory").setValue("tags/tag");
             getGoogleCodeHtmlInput(form).click(); // 
             form.submit((HtmlButton)last(form.getHtmlElementsByTagName("button")));
         } catch (FailingHttpStatusCodeException e) {            
